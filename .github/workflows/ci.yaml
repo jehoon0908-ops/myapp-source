@@ -15,19 +15,19 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      # 🔐 Harbor 로그인
+      # 🔐 Harbor 로그인 (하드코딩)
       - name: Login to Harbor
         uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.HARBOR_REGISTRY }}
-          username: ${{ secrets.HARBOR_USERNAME }}
-          password: ${{ secrets.HARBOR_PASSWORD }}
+          registry: 10.10.20.220:30002
+          username: admin
+          password: Harbor12345
 
       # 📦 이미지 이름 설정
       - name: Set image vars
         id: vars
         run: |
-          IMAGE=${{ secrets.HARBOR_REGISTRY }}/myapp/myapp
+          IMAGE=10.10.20.220:30002/myapp/myapp
           TAG=sha-${GITHUB_SHA}
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
           echo "tag=$TAG" >> $GITHUB_OUTPUT
